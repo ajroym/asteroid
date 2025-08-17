@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+:root {
+  --background: oklch(98.5% 0 0);
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(98.5% 0 0);
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+.particle {
+    animation-duration: 80s;
+    animation-iteration-count: infinite;
+}
+
+.particle:nth-child(1) {
+    animation-name: particle1;
+    animation-delay: 0;
+}
+
+@keyframes particle1 {
+    0% {
+      transform: translate3d(55vw, 79vh, 22px);
+    }
+    50% {
+      transform: translate3d(80vw, 51vh, 9px)
+    }
+    100% {
+      transform: translate3d(55vw, 79vh, 22px);
+    }
+}
+
+
+.particle:nth-child(2) {
+    animation-name: particle2;
+    animation-delay: 0s;
+}
+
+@keyframes particle2 {
+    0% {
+      transform: translate3d(2vw, 20vh, 22px);
+    }
+    50% {
+      transform: translate3d(40vw, 80vh, 2px)
+    }
+    100% {
+      transform: translate3d(2vw, 20vh, 22px);
+    }
+}
+
+
+.particle:nth-child(3) {
+    animation-name: particle3;
+    animation-delay: 0;
+}
+
+@keyframes particle3 {
+    0% {
+      transform: translate3d(12vw, 58vh, 14px);
+    }
+    50% {
+      transform: translate3d(61vw, 9vh, 5px)
+    }
+    100% {
+      transform: translate3d(12vw, 58vh, 14px);
+    }
+}
+
+
+.particle:nth-child(4) {
+    animation-name: particle4;
+    animation-delay: 0;
+}
+
+@keyframes particle4 {
+    0% {
+      transform: translate3d(96vw, 4vh, 5px);
+    }
+    50% {
+      transform: translate3d(71vw, 31vh, 8px)
+    }
+    100% {
+      transform: translate3d(96vw, 4vh, 5px);
+    }
+}
+
+
+.particle:nth-child(5) {
+    animation-name: particle5;
+    animation-delay: 0;
+}
+
+@keyframes particle5 {
+    0% {
+      transform: translate3d(46vw, 2vh, 22px);
+    }
+    50% {
+      transform: translate3d(30vw, 15vh, 9px)
+    }
+    100% {
+      transform: translate3d(46vw, 2vh, 22px);
+    }
+}
+
+
+.particle:nth-child(6) {
+    animation-name: particle6;
+    animation-delay: 0;
+}
+
+@keyframes particle6 {
+    0% {
+      transform: translate3d(94vw, 79vh, 30px);
+    }
+    50% {
+      transform: translate3d(64vw, 48vh, 9px)
+    }
+    100% {
+      transform: translate3d(74vw, 79vh, 30px);
+    }
+}
+
+
+.particle:nth-child(7) {
+    animation-name: particle7;
+    animation-delay: 0;
+}
+
+@keyframes particle7 {
+    0% {
+      transform: translate3d(18vw, 79vh, 22px);
+    }
+    50% {
+      transform: translate3d(24vw, 36vh, 9px)
+    }
+    100% {
+      transform: translate3d(18vw, 79vh, 22px);
+    }
+}
+
+
+.particle:nth-child(8) {
+    animation-name: particle8;
+    animation-delay: 0;
+}
+
+@keyframes particle8 {
+    0% {
+      transform: translate3d(72vw, 60vh, 22px);
+    }
+    50% {
+      transform: translate3d(96vw, 24vh, 9px)
+    }
+    100% {
+      transform: translate3d(72vw, 60vh, 22px);
+    }
+}
+
+
+.particle:nth-child(9) {
+    animation-name: particle9;
+    animation-delay: 0;
+}
+
+@keyframes particle9 {
+    0% {
+      transform: translate3d(38vw, 32vh, 22px);
+    }
+    50% {
+      transform: translate3d(6vw, 80vh, 9px)
+    }
+    100% {
+      transform: translate3d(38vw, 32vh, 22px);
+    }
+}
+
+
+.particle:nth-child(10) {
+    animation-name: particle10;
+    animation-delay: 0;
+}
+
+@keyframes particle10 {
+    0% {
+      transform: translate3d(68vw, 10vh, 22px);
+    }
+    50% {
+      transform: translate3d(90vw, 43vh, 9px)
+    }
+    100% {
+      transform: translate3d(68vw, 10vh, 22px);
+    }
+}
+
+
+.grid-background {
+  background-image: 
+    linear-gradient(to right, oklch(97% 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(97% 0 0) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.glow:hover {
+  box-shadow: 0 0 140px 2px oklch(95.6% 0.045 203.388);
+  transition-duration: 0.3s;
+}
