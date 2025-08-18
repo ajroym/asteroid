@@ -1,0 +1,31 @@
+interface SentryNearEarthObject {
+    links: {
+        next: string,
+        previous: string,
+        self: string
+    },
+
+    spkId: string,
+    designation: string,
+    sentryId: string,
+    fullname: string,
+    year_range_min: string,
+    year_range_max: string,
+    potential_impacts: string,
+    impact_probability: string,
+    v_inifinity: string,
+    absolute_magnitude: string,
+    estimated_diameter: string,
+    palermo_scale_ave: string,
+    Palermo_scale_max: string,
+    torino_scale: string,
+    last_obs: string,
+    last_obs_jd: string,
+    url_nasa_details: string,
+    url_orbital_elements: string,
+    is_active_sentry_object: boolean,
+    removal_date: string,
+    url_impact_details: string,
+    url_orbital_element_details: string,
+    average_lunar_distance: number,
+}
