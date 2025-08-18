@@ -8,16 +8,18 @@ import SearchButton from "./_components/search/search-button";
 import SearchBar from "./_components/search/search-bar";
 import Particles from "./_components/visual/particles";
 import Link from "next/link";
+import ClientErrorModal from "./_components/error/error-modal";
+import { ErrorModalWrapper } from "./_components/error/error-modal-wrapper";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full h-vh gap-24 grid-background">
+    <div className="flex flex-col w-full h-vh gap-24 grid-background relative">
       <div className="flex justify-center items-center w-full h-194 border-bottom-[1px] border-neutral-300 shadow-md shadow-neutral-600 relative">
       <Particles particleCount={10}></Particles>
         <div className="flex flex-col gap-16 w-full h-full absolute justify-center items-center">
           <span className="text-6xl font-bold text-shadow-lg/30 w-108">Earth's Fate at Your Fingertips</span>
           <SearchBar></SearchBar>
-          <SearchButton></SearchButton>
+          <ErrorModalWrapper message="Please enter a valid date."></ErrorModalWrapper>
         </div>
         <Image alt="banner img" src={banner} className="w-full h-full object-cover object-center"></Image>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lato, Exo_2 } from "next/font/google";
 import "./globals.css";
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import Footer from "./_components/footer/footer";
 
 const geistSans = Geist({
