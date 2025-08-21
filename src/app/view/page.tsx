@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation"
 import Image from "next/image";
 
 import exampleImg from "../../../assets/example-img.jpg"
+import DetailsBox from "./_components/details-box";
 
 export default function ViewResults() {
     const queryParams = useSearchParams();
@@ -31,6 +32,7 @@ export default function ViewResults() {
                         MEDIUM
                     </div>
                 </div>
+                <DetailsBox></DetailsBox>
             </div>
         </div>
     )
