@@ -1,9 +1,12 @@
+import { ApplicationError } from "@/lib/error/ApplicationError";
+import { ClientRequestError } from "@/lib/error/ClientRequestError";
+
 const API_URL = 'https://www.neowsapp.com/rest/v1';
 
 export const DateService = {
-    getAsteroidByDate: function getAsteroidByDate(dateString: string) {
+    getAsteroidByDate: async function getAsteroidByDate(dateString: string) {
         const date = parseDate(dateString);
-        const url = API_URL + `rest/v1/feed?start_date=${date}&end_date=${date}&detailed=true`
+        const url = API_URL + `/feed?start_date=${date}&end_date=${date}&detailed=true`
         
         return requestData(url);
     } 
@@ -32,23 +35,19 @@ async function requestData(url: string) {
 
     } catch (error) {
         if (error instanceof ClientRequestError) {
-            return {
-                status: response.status,
-                statusText: response.statusText,
-                stackTrace: error.stack,
-            };
+            return error as ClientRequestError;
         }
     }
 } 
 
-function parseDate(dateString: string) {
+export function parseDate(dateString: string) {
     const date = new Date(dateString);
     const currentDate = new Date();
 
-    if (date.getDay() < 0 || 
+    if ((date.getDay() <= 0 || !date.getDay()) || 
     (date.getMonth() < 0 || date.getMonth() > 11) || 
     (date.getFullYear() < 1900 || date.getFullYear() > currentDate.getFullYear())) {
-        throw new ApplicationError("Invalid date format entered (YYYY-MM-DD).", "Please enter a valid date.")
+        throw new ApplicationError("Invalid date format entered (YYYY-MM-DD).", "Please enter a valid date.");
     }
 
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
