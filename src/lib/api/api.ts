@@ -1,5 +1,6 @@
 import { ApplicationError } from "@/lib/error/ApplicationError";
 import { ClientRequestError } from "@/lib/error/ClientRequestError";
+import { NearEarthObject, NearEarthObjectsByDate } from "../entities/neo";
 
 const API_URL = 'https://www.neowsapp.com/rest/v1';
 
@@ -8,7 +9,8 @@ export const DateService = {
         const date = parseDate(dateString);
         const url = API_URL + `/feed?start_date=${date}&end_date=${date}&detailed=true`
         
-        return requestData(url);
+        const response = await requestData(url);
+        return findMostHazardousObject(response, date);
     } 
 }
 
@@ -40,6 +42,26 @@ async function requestData(url: string) {
     }
 } 
 
+function findMostHazardousObject(earthObjects: NearEarthObjectsByDate, date: string) {
+    let object: NearEarthObject | undefined = undefined;
+    const objects = earthObjects.near_earth_objects;
+
+    for (let obj of objects[date]) {
+        if (!object) object = obj;
+
+        if (obj.is_potentially_hazardous_asteroid && !object!.is_potentially_hazardous_asteroid ||
+           ((obj.is_potentially_hazardous_asteroid && object!.is_potentially_hazardous_asteroid) && 
+            Number(obj.close_approach_data[0].miss_distance.kilometers) < Number(object!.close_approach_data[0].miss_distance.kilometers))) 
+         {
+            object = obj;
+         }
+    }
+    return object;
+}
+
+/*
+    TODO : FIX THIS LATER
+*/
 export function parseDate(dateString: string) {
     const date = new Date(dateString);
     const currentDate = new Date();
@@ -50,5 +72,13 @@ export function parseDate(dateString: string) {
         throw new ApplicationError("Invalid date format entered (YYYY-MM-DD).", "Please enter a valid date.");
     }
 
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const year = String(date.getFullYear());
+    let month = String(date.getMonth() + 1);
+    let day = String(date.getDate() + 1);
+
+    if (date.getMonth() + 1 < 10) month = '0' + month;
+    if (date.getDate() + 1 < 10) day = '0' + day;
+
+
+    return `${year}-${month}-${day}`;
 }

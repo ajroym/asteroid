@@ -67,7 +67,9 @@ export interface NearEarthObject {
 }
 
 export interface NearEarthObjectsByDate {
-    [date: string]: NearEarthObject[]
+    near_earth_objects: {
+        [date: string]: NearEarthObject[]
+    }
 }
 
 interface CloseApproachData {
