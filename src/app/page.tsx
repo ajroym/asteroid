@@ -4,8 +4,6 @@ import banner from "../../assets/banner.jpg";
 import meteorThumbnail from "../../assets/meteor.jpg";
 import meteorViewingThumbnail from "../../assets/meteor-gazing.jpg"
 
-import SearchButton from "./_components/search/search-button";
-import SearchBar from "./_components/search/search-bar";
 import Particles from "./_components/visual/particles";
 import Link from "next/link";
 import ClientErrorModal from "./_components/error/error-modal";
@@ -18,7 +16,6 @@ export default function Home() {
       <Particles particleCount={10}></Particles>
         <div className="flex flex-col gap-16 w-full h-full absolute justify-center items-center">
           <span className="text-6xl font-bold text-shadow-lg/30 w-108">Earth's Fate at Your Fingertips</span>
-          <SearchBar></SearchBar>
           <ErrorModalWrapper message="Please enter a valid date."></ErrorModalWrapper>
         </div>
         <Image alt="banner img" src={banner} className="w-full h-full object-cover object-center"></Image>
