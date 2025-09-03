@@ -1,4 +1,4 @@
-class ApplicationError extends Error {
+export class ApplicationError extends Error {
     /**
      * Handles all non-networking related errors,
      * any other error thrown by the application.

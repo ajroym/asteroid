@@ -1,4 +1,4 @@
-interface SentryNearEarthObject {
+export interface SentryNearEarthObject {
     links: {
         next: string,
         previous: string,

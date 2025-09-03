@@ -1,4 +1,4 @@
-class ClientRequestError extends Error {
+export class ClientRequestError extends Error {
     
     /**
      * Handles 400-level errors a client might encounter
