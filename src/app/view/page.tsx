@@ -6,9 +6,11 @@ import Image from "next/image";
 import exampleImg from "../../../assets/example-img.jpg"
 import DetailsBox from "./_components/details-box";
 import { useEffect, useState } from "react";
-import { DateService } from "@/lib/api/api";
+import { DateService, NEOService } from "@/lib/api/api";
 import { NearEarthObject } from "@/lib/entities/neo";
 import { ClientNeo } from "@/lib/entities/clientneo";
+import { ClientSentry } from "@/lib/entities/clientsentry";
+import { SentryNearEarthObject } from "@/lib/entities/sentry";
 
 export default function ViewResults() {
     const [neoClientObject, setNeoClientObject] = useState<ClientNeo>({
@@ -20,7 +22,10 @@ export default function ViewResults() {
         orbitingBody: 'N/A',
         firstObservationDate: '01/01/1900',
         lastObservationDate: '01/01/1900',
-    })
+    });
+
+    const [sentryClientObject, setSentryClientObject] = useState<ClientSentry | undefined>(undefined);
+
     const [riskLevel, setRiskLevel] = useState<string>('NONE');
 
     const queryParams = useSearchParams();
@@ -28,10 +33,35 @@ export default function ViewResults() {
 
     const date = new Date(dateParam!);
 
+    const createSentryObject = (sentry: SentryNearEarthObject) => {
+        const clientSentry: ClientSentry = {
+            spkId: sentry.spkId,
+            potentialImpacts: sentry.potential_impacts,
+            impactProbability: sentry.impact_probability,
+            absoluteMagnitude: sentry.absolute_magnitude,
+            estimatedDiameter: sentry.estimated_diameter,
+            torinoScale: sentry.torino_scale,
+            lastObservation: sentry.last_obs
+        }
+
+        setSentryClientObject(clientSentry);
+    }
+
     const evaluateRiskLevel = (neo: NearEarthObject) => {
         if (neo.is_potentially_hazardous_asteroid && !neo.is_sentry_object) {
             setRiskLevel('LOW');
         }
+        else if (neo.is_sentry_object) {
+            NEOService.getSentryById(neo.id).then((response) => {
+                const torinoScale = Number(response.torino_scale);
+
+                if (torinoScale > 0 && torinoScale < 5)  setRiskLevel('LOW');
+                if (torinoScale >= 5 && torinoScale < 8) setRiskLevel('MEDIUM');
+                if (torinoScale >= 8) return setRiskLevel('HIGH');
+
+                createSentryObject(response);
+            });
+        };
     }
 
     useEffect(() => {
@@ -78,7 +108,7 @@ export default function ViewResults() {
                         { riskLevel }
                     </div>
                 </div>
-                <DetailsBox clientNeo={neoClientObject}></DetailsBox>
+                <DetailsBox clientNeo={neoClientObject} clientSentry={sentryClientObject}></DetailsBox>
             </div>
         </div>
     )
