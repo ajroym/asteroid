@@ -136,7 +136,7 @@ body {
       transform: translate3d(64vw, 48vh, 9px)
     }
     100% {
-      transform: translate3d(74vw, 79vh, 30px);
+      transform: translate3d(94vw, 79vh, 30px);
     }
 }
 

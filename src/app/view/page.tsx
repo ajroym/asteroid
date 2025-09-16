@@ -32,6 +32,7 @@ export default function ViewResults() {
     const dateParam = queryParams.get('date');
 
     const date = new Date(dateParam!);
+    date.setDate(date.getDate() + 1)
 
     const createSentryObject = (sentry: SentryNearEarthObject) => {
         const clientSentry: ClientSentry = {

@@ -1,6 +1,6 @@
 import { ClientNeo } from "@/lib/entities/clientneo";
 import { ClientSentry } from "@/lib/entities/clientsentry";
-import NoObjectData from "./no-data-";
+import NoObjectData from "./no-data";
 
 function HasSentry({ clientSentry }: { clientSentry: ClientSentry | undefined }) {
     if (clientSentry) {

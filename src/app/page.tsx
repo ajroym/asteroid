@@ -8,6 +8,7 @@ import Particles from "./_components/visual/particles";
 import Link from "next/link";
 import ClientErrorModal from "./_components/error/error-modal";
 import { ErrorModalWrapper } from "./_components/error/error-modal-wrapper";
+import { parseDate } from "@/lib/api/api";
 
 export default function Home() {
   return (
@@ -27,7 +28,7 @@ export default function Home() {
           <div className="flex w-128 h-64 relative">
             <div className="w-full h-full absolute">
               <div className="flex w-full h-full items-center justify-center">
-                <Link className="text-4xl font-semibold text-shadow-lg/30" href={"/"}>Today's Near-Earth Object</Link>
+                <Link className="text-4xl font-semibold text-shadow-lg/30" href={`/view?date=${parseDate(`${new Date(Date.now()).getFullYear()}-${new Date(Date.now()).getMonth() + 1}-${new Date(Date.now()).getDate() - 1}`)}`}>Today's Near-Earth Object</Link>
               </div>
             </div>
             <div className="bg-neutral-200 border-[1px] border-neutral-300 rounded-md overflow-hidden shadow-sm shadow-neutral-700">
@@ -56,7 +57,7 @@ export default function Home() {
             ☄️
           </div>
           <div className="text-2xl text-cyan-950">
-            Want to see more? Head to <Link className="underline" href={""}>GitHub</Link> to view this project's source files and much more!
+            Want to see more? Head to <Link className="underline" href={"https://github.com/ajroym/asteroid"}>GitHub</Link> to view this project's source files and much more!
           </div>
         </div>
     </div>
